@@ -1,0 +1,11 @@
+[project]
+name = animeshdotblog-model
+url_style = absolute
+url = https://animeshb.github.io
+
+[packages]
+lektor-atom = 0.2
+lektor-markdown-header-anchors = 0.2
+
+[servers.ghpages]
+target = ghpages://animeshb/animeshb.github.io

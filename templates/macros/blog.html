@@ -1,0 +1,63 @@
+{% macro render_blog_post(post, from_index=false) %}
+  <div class="blog-post">
+  {% if from_index %}
+    <h2><a href="{{ post|url }}">{{ post.title }}</a></h2>
+  {% else %}
+    <h2>{{ post.title }}</h2>
+  <p class="meta">
+    written by
+    {% if post.twitter_handle %}
+      <a href="https://twitter.com/{{ post.twitter_handle
+        }}">{{ post.author or post.twitter_handle }}</a>
+    {% else %}
+      {{ post.author }}
+    {% endif %}
+    on {{ post.pub_date }}
+    {% endif %}
+  </p>
+  <p class="excerpt">
+      {% if from_index %}
+        {{ post.excerpt }}
+      {% else %}
+        <div>
+            {{ post.excerpt }}
+        </div>
+
+        <p>
+            {% if not from_index %}
+              {% if post.body.toc %}
+              <div class="toc-container">
+                  <p>contents</p>
+                  <ul class="toc">
+                      {% for item in post.body.toc recursive %}
+                          <li><a href="#{{ item.anchor }}">{{ item.title }}</a>
+                              {%if item.children %}
+                                  <ul>{{ loop(item.children) }}</ul>
+                              {% endif %}
+                          </li>
+                      {% endfor %}
+                  </ul>
+              </div>
+              {% endif %}
+            {% endif %}
+          </p>
+          
+
+        <div>
+            {{ post.body }}            
+        </div>
+        <div>
+            {%if post.categories %}
+              <div>Categories:
+                  <ul>
+                  {% for category in post.categories  %}
+                      <li><a href="/categories/{{ category }}">{{category}}</a>{% if not loop.last %},{% endif %}</li>
+                  {% endfor %}
+                  </ul>
+              </div>
+            {%endif%}
+        </div>
+      {% endif %}
+  </p>
+  </div>
+{% endmacro %}

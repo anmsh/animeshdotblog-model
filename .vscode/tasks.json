@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "lektor-run",
+            "command": "lektor",
+            "type": "shell",
+            "args": ["server", "-p", "5001"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
